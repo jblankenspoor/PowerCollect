@@ -1,0 +1,9 @@
+{
+  "short_name": "Task Flow",
+  "name": "Task Flow App",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
