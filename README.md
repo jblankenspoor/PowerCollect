@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # PowerCollect Task Flow App
 
 A modern task management application built with React and Tailwind CSS.
