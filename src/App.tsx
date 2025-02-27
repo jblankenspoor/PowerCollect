@@ -369,20 +369,15 @@ function App() {
                   {columns.map((column, colIndex) => (
                     <th 
                       key={column.id}
-                      className={`px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ${
-                        hoveredColumn === column.id ? 'bg-blue-50' : ''
-                      } ${colIndex === 0 ? 'flex items-center' : ''}`}
+                      className={`header-cell text-left ${colIndex === 0 ? 'first-column' : ''}`}
                       onMouseEnter={() => setHoveredColumn(column.id)}
                       onMouseLeave={() => setHoveredColumn(null)}
                     >
-                      {colIndex === 0 && (
-                        <input type="checkbox" className="rounded border-gray-300 mr-3" />
-                      )}
-                      <div className="flex items-center justify-between w-full group">
-                        <div 
-                          className="cursor-pointer"
-                          onClick={() => setSelectedCell(`header-${column.id}`)}
-                        >
+                      <div className="header-content">
+                        {colIndex === 0 && (
+                          <input type="checkbox" className="header-checkbox rounded border-gray-300" />
+                        )}
+                        <div className="flex-grow">
                           {selectedCell === `header-${column.id}` ? (
                             <input
                               type="text"
@@ -390,32 +385,37 @@ function App() {
                               onChange={(e) => updateColumnHeader(column.id, e.target.value)}
                               onBlur={() => setSelectedCell(null)}
                               autoFocus
-                              className="bg-transparent border-b border-gray-400 focus:outline-none focus:border-blue-500 w-full"
+                              className="header-input"
                             />
                           ) : (
-                            <span>
-                              {column.header}
-                              <ChevronDownIcon className="h-4 w-4 ml-1 inline" />
-                            </span>
+                            <div 
+                              className="header-title"
+                              onClick={() => setSelectedCell(`header-${column.id}`)}
+                            >
+                              <span className="header-text">{column.header}</span>
+                              <ChevronDownIcon className="h-4 w-4 ml-1" />
+                            </div>
                           )}
                         </div>
                         <button
                           onClick={() => removeColumn(column.id)}
-                          className="text-gray-400 hover:text-red-500 ml-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                          className="delete-button focus:outline-none"
                         >
-                          <XMarkIcon className="h-4 w-4" />
+                          <XMarkIcon className="delete-icon" />
                         </button>
                       </div>
                     </th>
                   ))}
                   
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th 
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider add-column-cell"
+                    onClick={addColumn}
+                  >
                     <button
-                      onClick={addColumn}
-                      className="text-gray-400 hover:text-blue-500"
+                      className="focus:outline-none"
                       title="Add column"
                     >
-                      <PlusIcon className="h-4 w-4" />
+                      <PlusIcon className="add-icon" />
                     </button>
                   </th>
                 </tr>
@@ -438,34 +438,30 @@ function App() {
                       return (
                         <td 
                           key={cell.id}
-                          className={`px-6 py-4 whitespace-nowrap ${
-                            hoveredColumn === column?.id && !isFirstCell ? 'bg-blue-50' : ''
-                          }`}
+                          className="table-cell whitespace-nowrap"
                         >
                           {isFirstCell ? (
-                            <div className="flex items-center">
-                              <input type="checkbox" className="rounded border-gray-300 mr-3" />
-                              <div 
-                                className="cursor-pointer text-sm font-medium text-gray-900"
-                                onClick={() => setSelectedCell(cell.id)}
-                              >
-                                {selectedCell === cell.id ? (
-                                  <input
-                                    type="text"
-                                    value={cell.value}
-                                    onChange={(e) => updateCellValue(cell.id, e.target.value)}
-                                    onBlur={() => setSelectedCell(null)}
-                                    autoFocus
-                                    className="bg-transparent border-b border-gray-400 focus:outline-none focus:border-blue-500 w-full"
-                                  />
-                                ) : (
-                                  cell.value
-                                )}
-                              </div>
+                            <div 
+                              className="cell-content with-checkbox"
+                              onClick={() => setSelectedCell(cell.id)}
+                            >
+                              <input type="checkbox" className="rounded border-gray-300 absolute left-6" />
+                              {selectedCell === cell.id ? (
+                                <input
+                                  type="text"
+                                  value={cell.value}
+                                  onChange={(e) => updateCellValue(cell.id, e.target.value)}
+                                  onBlur={() => setSelectedCell(null)}
+                                  autoFocus
+                                  className="cell-input text-sm font-medium text-gray-900"
+                                />
+                              ) : (
+                                <span className="text-sm font-medium text-gray-900">{cell.value}</span>
+                              )}
                             </div>
                           ) : isStatusCell ? (
                             <div 
-                              className="cursor-pointer"
+                              className="cell-content"
                               onClick={() => setSelectedCell(cell.id)}
                             >
                               {selectedCell === cell.id ? (
@@ -474,21 +470,21 @@ function App() {
                                   onChange={(e) => updateCellValue(cell.id, e.target.value)}
                                   onBlur={() => setSelectedCell(null)}
                                   autoFocus
-                                  className="bg-transparent border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                  className="cell-select"
                                 >
                                   <option value="Done">Done</option>
                                   <option value="In progress">In progress</option>
                                   <option value="To do">To do</option>
                                 </select>
                               ) : (
-                                <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(cell.value)}`}>
+                                <span className={`status-badge ${getStatusColor(cell.value)}`}>
                                   {cell.value}
                                 </span>
                               )}
                             </div>
                           ) : isPriorityCell ? (
                             <div 
-                              className="cursor-pointer"
+                              className="cell-content"
                               onClick={() => setSelectedCell(cell.id)}
                             >
                               {selectedCell === cell.id ? (
@@ -497,21 +493,21 @@ function App() {
                                   onChange={(e) => updateCellValue(cell.id, e.target.value)}
                                   onBlur={() => setSelectedCell(null)}
                                   autoFocus
-                                  className="bg-transparent border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                  className="cell-select"
                                 >
                                   <option value="Low">Low</option>
                                   <option value="Medium">Medium</option>
                                   <option value="High">High</option>
                                 </select>
                               ) : (
-                                <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getPriorityColor(cell.value)}`}>
+                                <span className={`priority-badge ${getPriorityColor(cell.value)}`}>
                                   {cell.value}
                                 </span>
                               )}
                             </div>
                           ) : (
                             <div 
-                              className="cursor-pointer text-sm text-gray-500"
+                              className="cell-content"
                               onClick={() => setSelectedCell(cell.id)}
                             >
                               {selectedCell === cell.id ? (
@@ -521,10 +517,10 @@ function App() {
                                   onChange={(e) => updateCellValue(cell.id, e.target.value)}
                                   onBlur={() => setSelectedCell(null)}
                                   autoFocus
-                                  className="bg-transparent border-b border-gray-400 focus:outline-none focus:border-blue-500 w-full"
+                                  className="cell-input text-sm text-gray-500"
                                 />
                               ) : (
-                                cell.value
+                                <span className="text-sm text-gray-500">{cell.value}</span>
                               )}
                             </div>
                           )}
@@ -535,16 +531,27 @@ function App() {
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <button
                         onClick={() => removeRow(row.id)}
-                        className="text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="delete-button focus:outline-none"
                         title="Delete row"
                       >
-                        <XMarkIcon className="h-4 w-4" />
+                        <XMarkIcon className="delete-icon" />
                       </button>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+            <div 
+              className="add-row-section"
+              onClick={addRow}
+            >
+              <button
+                className="add-button focus:outline-none"
+                title="Add row"
+              >
+                <PlusIcon className="add-icon" />
+              </button>
+            </div>
           </div>
         </div>
       </div>

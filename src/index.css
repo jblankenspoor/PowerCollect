@@ -11,39 +11,239 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Table cell styles */
+.table-cell {
+  position: relative;
+  padding: 0 !important;
 }
 
-/* Editable table styles */
-.cursor-pointer {
+.cell-content {
+  position: absolute;
+  inset: 0;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
   cursor: pointer;
 }
 
-.transition-opacity {
-  transition: opacity 0.2s ease-in-out;
+.cell-content.with-checkbox {
+  padding-left: 3rem;
 }
 
-th, td {
+/* Header styles */
+.header-cell {
+  position: relative;
+  padding: 0 !important;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgb(107, 114, 128);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 2.5rem;
+  padding: 0.75rem 1.5rem;
+}
+
+.first-column .header-content {
+  padding-left: 1.5rem;
+}
+
+.header-checkbox {
+  margin-right: 0.75rem;
+}
+
+.header-title {
+  display: inline-flex;
+  align-items: center;
+  position: absolute;
+  inset: 0;
+  padding: 0.75rem 1.5rem;
+  width: 75%;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+  z-index: 1;
+}
+
+.first-column .header-title {
+  padding-left: 3rem;
+}
+
+.header-text {
   position: relative;
 }
 
-th:hover, td:hover {
-  background-color: rgba(59, 130, 246, 0.05);
-}
-
-input:focus, select:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
-}
-
-/* Hover styles for rows and columns */
-tr.group:hover {
-  background-color: rgba(59, 130, 246, 0.05);
-}
-
-/* Transition for hover effects */
-tr, td, th {
+.header-text::after {
+  content: '';
+  position: absolute;
+  inset: -0.5rem;
+  z-index: -1;
+  border-radius: 4px;
+  background-color: transparent;
   transition: background-color 0.15s ease-in-out;
+}
+
+.header-title:hover .header-text::after {
+  background-color: transparent;
+}
+
+/* Input and select styles */
+.cell-input, .cell-select {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+  font-weight: inherit;
+  text-transform: inherit;
+}
+
+.cell-input:focus, .cell-select:focus {
+  padding: 0.5rem;
+  margin: -0.5rem;
+  width: calc(100% - 2rem);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: rgb(107, 114, 128);
+  min-height: 2.5rem;
+}
+
+.header-input {
+  position: absolute;
+  inset: 0;
+  padding: 0.75rem 1.5rem;
+  width: 75%;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: rgb(107, 114, 128);
+  min-height: 2.5rem;
+  border: none;
+  background: transparent;
+}
+
+.first-column .header-input {
+  padding-left: 1.5rem;
+}
+
+.header-input:focus {
+  outline: 2px solid rgba(59, 130, 246, 0.5);
+  outline-offset: -2px;
+  border-radius: 4px;
+  margin: 0;
+}
+
+/* Status and priority badges */
+.status-badge, .priority-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* Hover effects */
+.cell-content:hover {
+  background-color: transparent;
+}
+
+/* Transition effects */
+.cell-content, .cell-input, .cell-select {
+  transition: all 0.15s ease-in-out;
+}
+
+/* Delete and add icons */
+.delete-icon {
+  color: rgb(156, 163, 175);
+  transition: all 0.15s ease-in-out;
+  width: 1rem;
+  height: 1rem;
+}
+
+.delete-icon:hover {
+  color: rgb(239, 68, 68);
+}
+
+.delete-button {
+  padding: 0.5rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-button:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+.add-icon {
+  color: rgb(156, 163, 175);
+  transition: all 0.15s ease-in-out;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.add-icon:hover {
+  color: rgb(59, 130, 246);
+}
+
+.add-button {
+  padding: 0.5rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-button:hover {
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+/* Add column placeholder */
+.add-column-cell {
+  width: 100px !important;
+  max-width: 100px !important;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.add-column-cell:hover {
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+.add-column-cell button {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Add row section */
+.add-row-section {
+  display: flex;
+  justify-content: center;
+  padding: 0.75rem;
+  border-top: 1px solid rgb(229, 231, 235);
+  background-color: rgb(249, 250, 251);
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.add-row-section:hover {
+  background-color: rgba(59, 130, 246, 0.1);
 }
