@@ -9,5 +9,41 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f9fafb;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Editable table styles */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.transition-opacity {
+  transition: opacity 0.2s ease-in-out;
+}
+
+th, td {
+  position: relative;
+}
+
+th:hover, td:hover {
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
+input:focus, select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+/* Hover styles for rows and columns */
+tr.group:hover {
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
+/* Transition for hover effects */
+tr, td, th {
+  transition: background-color 0.15s ease-in-out;
 }
