@@ -1,4 +1,5 @@
-# Task Flow App
+<<<<<<< HEAD
+# PowerCollect Task Flow App
 
 A modern task management application built with React and Tailwind CSS.
 
@@ -29,3 +30,10 @@ npm start
 - TypeScript
 - Tailwind CSS
 - Heroicons
+
+## Live Demo
+
+Visit [PowerCollect Task Flow App](https://jblankenspoor.github.io/PowerCollect) to see the app in action.
+=======
+# PowerCollect
+>>>>>>> 3d3e916ae9716c09e3e334099c35bd0888c82954
