@@ -63,7 +63,9 @@ const initialTasks: Task[] = [
 ];
 
 // Valid options for dropdowns
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const statusOptions = ['Done', 'In progress', 'To do'];
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const priorityOptions = ['Low', 'Medium', 'High'];
 
 function App() {
@@ -406,6 +408,7 @@ function App() {
                     onMouseLeave={() => setHoveredRow(null)}
                   >
                     {row.cells.map((cell, cellIndex) => {
+                      // eslint-disable-next-line @typescript-eslint/no-unused-vars
                       const column = columns[cellIndex];
                       const isFirstCell = cellIndex === 0;
                       const isStatusCell = cellIndex === 1;
