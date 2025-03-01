@@ -472,9 +472,9 @@ function App() {
                                   autoFocus
                                   className="cell-select"
                                 >
-                                  <option value="Done">Done</option>
-                                  <option value="In progress">In progress</option>
-                                  <option value="To do">To do</option>
+                                  {statusOptions.map(option => (
+                                    <option key={option} value={option}>{option}</option>
+                                  ))}
                                 </select>
                               ) : (
                                 <span className={`status-badge ${getStatusColor(cell.value)}`}>
@@ -495,9 +495,9 @@ function App() {
                                   autoFocus
                                   className="cell-select"
                                 >
-                                  <option value="Low">Low</option>
-                                  <option value="Medium">Medium</option>
-                                  <option value="High">High</option>
+                                  {priorityOptions.map(option => (
+                                    <option key={option} value={option}>{option}</option>
+                                  ))}
                                 </select>
                               ) : (
                                 <span className={`priority-badge ${getPriorityColor(cell.value)}`}>
