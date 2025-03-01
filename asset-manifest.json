@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/PowerCollect/static/css/main.75f45cb0.css",
+    "main.js": "/PowerCollect/static/js/main.1e8baebb.js",
+    "index.html": "/PowerCollect/index.html",
+    "main.75f45cb0.css.map": "/PowerCollect/static/css/main.75f45cb0.css.map",
+    "main.1e8baebb.js.map": "/PowerCollect/static/js/main.1e8baebb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.75f45cb0.css",
+    "static/js/main.1e8baebb.js"
+  ]
+}
