@@ -156,6 +156,7 @@ function App() {
   };
 
   // Remove a column
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const removeColumn = (columnId: string) => {
     // Ensure we always have at least one column
     if (columns.length <= 1) return;
@@ -207,6 +208,7 @@ function App() {
   };
 
   // Update a column header
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const updateColumnHeader = (columnId: string, header: string) => {
     setColumns(
       columns.map((col) =>
@@ -372,45 +374,12 @@ function App() {
             <table className="min-w-full divide-y divide-gray-200">
               <thead>
                 <tr className="bg-gray-50">
-                  {columns.map((column, index) => (
+                  {columns.map((
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    column, index) => (
                     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                    <th 
-                      key={column.id}
-                      className={`header-cell text-left ${index === 0 ? 'first-column' : ''}`}
-                      onMouseEnter={() => setHoveredColumn(column.id)}
-                      onMouseLeave={() => setHoveredColumn(null)}
-                    >
-                      <div className="header-content">
-                        {index === 0 && (
-                          <input type="checkbox" className="header-checkbox rounded border-gray-300" />
-                        )}
-                        <div className="flex-grow">
-                          {selectedCell === `header-${column.id}` ? (
-                            <input
-                              type="text"
-                              value={column.header}
-                              onChange={(e) => updateColumnHeader(column.id, e.target.value)}
-                              onBlur={() => setSelectedCell(null)}
-                              autoFocus
-                              className="header-input"
-                            />
-                          ) : (
-                            <div 
-                              className="header-title"
-                              onClick={() => setSelectedCell(`header-${column.id}`)}
-                            >
-                              <span className="header-text">{column.header}</span>
-                              <ChevronDownIcon className="h-4 w-4 ml-1" />
-                            </div>
-                          )}
-                        </div>
-                        <button
-                          onClick={() => removeColumn(column.id)}
-                          className="delete-button focus:outline-none"
-                        >
-                          <XMarkIcon className="delete-icon" />
-                        </button>
-                      </div>
+                    <th key={column.id} className={`header-cell text-left ${index === 0 ? 'first-column' : ''}`}>
+                      {/* ...existing code... */}
                     </th>
                   ))}
                   

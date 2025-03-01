@@ -2,6 +2,7 @@
   "name": "task-flow-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://jblankenspoor.github.io/PowerCollect/",
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
